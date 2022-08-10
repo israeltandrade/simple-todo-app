@@ -4,8 +4,8 @@
 
     <!-- Input -->
     <div class="d-flex">
-      <input type="text" placeholder="Enter task" class="form-control">
-      <button class="btn btn-warning rounded-0">SUBMIT</button>
+      <input v-model="task" type="text" placeholder="Enter task" class="form-control">
+      <button @click="submitTask" class="btn btn-warning rounded-0">SUBMIT</button>
     </div>
     
     <!-- Task table -->
@@ -23,12 +23,12 @@
       <td>{{ task.name }}</td>
       <td>{{ task.status }}</td>
       <td>
-        <div class="text-center">
+        <div class="text-center" @click="editTask(index)">
           <span class="fa fa-pen"></span>
         </div>
       </td>
       <td>
-        <div class="text-center">
+        <div class="text-center" @click="deleteTask(index)">
           <span class="fa fa-trash"></span>
         </div>
       </td>
@@ -40,13 +40,15 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'TodoApp',
   props: {
     msg: String
   },
 
   data () {
     return {
+      task: "",
+      editedTask: null,
       tasks: [
         {
           name: 'Create Vue.js App',
@@ -57,6 +59,31 @@ export default {
           status: 'Doing'
         }
       ],
+    }
+  },
+
+  methods: {
+    submitTask() {
+      if(this.task.length === 0) return;
+      if(this.editedTask == null){
+        this.tasks.push({
+        name: this.task,
+        status: "To-Do"
+        });
+      } else {
+        this.tasks[this.editedTask].name = this.task;
+        this.editedTask = null;
+      }
+      this.task = ''
+    },
+    
+    deleteTask(index) {
+      this.tasks.splice(index, 1)
+    },
+
+    editTask(index) {
+      this.task = this.tasks[index].name;
+      this.editedTask = index;
     }
   }
 }
