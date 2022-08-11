@@ -1,4 +1,8 @@
-# simple-todo-app
+# Simple Todo App
+
+An app made with Vue.js and Bootstrap.
+
+## Getting Started
 
 ## Project setup
 ```
@@ -8,17 +12,8 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Prerequisites
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* node.js
+* npm
